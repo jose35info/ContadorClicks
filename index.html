@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de números</title>
+    <style>
+        /* Variáveis para facilitar ajustes futuros */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #1c1e26, #2a2d3e);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --neon-green: rgba(0, 255, 135, 1);
+            --neon-red: rgba(255, 0, 84, 1);
+            --text-white: #ffffff;
+        }
+
+        /* Reset básico */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            /* min-height evita cortes em telas pequenas */
+            margin: 0;
+            color: var(--text-white);
+            overflow: hidden;
+            /* Remove barras de rolagem desnecessárias */
+        }
+
+        /* Container Principal - Cria um cartão de vidro para agrupar tudo */
+        .container {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            /* Safari */
+            padding: 3rem;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin: 0 0 30px 0;
+            background: linear-gradient(to right, #fff, #aaa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            /* Texto gradiente */
+            color: transparent;
+            font-weight: 700;
+        }
+
+        /* Caixa do número com efeito de "Tela" (Inset) */
+        .saida {
+            width: 100%;
+            min-width: 200px;
+            height: 120px;
+            background: rgba(0, 0, 0, 0.2);
+            /* Fundo mais escuro */
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            /* Sombra interna para dar profundidade */
+            box-shadow: inset 2px 2px 10px rgba(0, 0, 0, 0.5),
+                inset -2px -2px 10px rgba(255, 255, 255, 0.05);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Área dos botões */
+        .controles {
+            display: flex;
+            gap: 20px;
+            /* Espaço consistente entre botões */
+        }
+
+        button {
+            padding: 16px 36px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            color: #fff;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            /* Animação elástica */
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efeito de brilho interno nos botões */
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        /* Cores e Glows Específicos */
+        .clear {
+            background: rgba(0, 255, 135, 0.15);
+            box-shadow: 0 0 15px rgba(0, 255, 135, 0.1);
+        }
+
+        .clear:hover {
+            background: rgba(0, 255, 135, 0.4);
+            box-shadow: 0 0 25px rgba(0, 255, 135, 0.4);
+            transform: translateY(-3px);
+            border-color: rgba(0, 255, 135, 0.6);
+        }
+
+        */ .decremento {
+            background: rgba(255, 0, 84, 0.15);
+            box-shadow: 0 0 15px rgba(255, 0, 84, 0.1);
+        }
+
+        .decremento:hover {
+            background: rgba(255, 0, 84, 0.4);
+            box-shadow: 0 0 25px rgba(255, 0, 84, 0.4);
+            transform: translateY(-3px);
+            border-color: rgba(255, 0, 84, 0.6);
+        }
+
+        button:active {
+            transform: scale(0.95) translateY(0);
+            box-shadow: none;
+        }
+    </style>
+</head>
+
+<body class="incremento">
+    <h1>Contador de Clicks</h1>
+    <div class="saida">
+        0
+    </div>
+    <!-- <button>+1</button>
+    <button class="decremento">-1</button> -->
+    <button class="clear">Clear</button>
+    <script>
+        function atualizarDisplay() {
+            const output = document.querySelector(".saida");
+            let aumentar = document.querySelector(".incremento");
+            let limpar = document.querySelector(".clear");
+            let start = 1;
+
+            aumentar.addEventListener("click", () => {
+                output.innerHTML = start++;
+            });
+            limpar.addEventListener("click", () => {
+                start = 0;
+            });
+        }
+        atualizarDisplay();
+    </script>
+
+</body>
+
+</html>
