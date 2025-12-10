@@ -39,11 +39,9 @@ O projeto é 100% estático e não requer instalação de pacotes:
 
 1. **Clone este repositório** (ou baixe os arquivos):
    ```bash
-   git clone [https://github.com/seu-usuario/nome-do-repositorio.git](https://github.com/seu-usuario/nome-do-repositorio.git)
+   git clone https://github.com/jose35info/ContadorClicks.git
 
-   Com certeza! Como o projeto agora é um "Clicker" de Tela Cheia onde o clique em qualquer lugar incrementa o contador, vou criar um README.md que reflete essa funcionalidade única.
-
-
+   
 📝 Licença
 
 Este projeto está sob a licença MIT.
